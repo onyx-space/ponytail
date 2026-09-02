@@ -92,6 +92,16 @@ Hardware is never the ideal on paper: a real clock drifts, a real sensor
 reads off, a PCA9685 runs a few percent fast. Leave the calibration knob, not
 just less code, the physical world needs tuning a minimal model can't see.
 
+Your difficulty estimate is the wrong place to be lazy. Compiler errors and
+missing dependencies are cheap — the tool tells you what is wrong. A wrong
+assumption about a real platform is not: interaction feel, input latency,
+event passthrough, rendering, on-device behavior never match the paper model,
+nothing flags the mistake, it just feels off when a human uses it. The
+smallest confident diff shipped unverified into a black box — a device, a
+network round-trip, an event flow, touch — is how whole projects get redone.
+When the change touches a black box, verify it in the real environment even
+if that costs more code. Minimum code that works means works, not assumed.
+
 Lazy code without its check is unfinished. Non-trivial logic (a branch, a
 loop, a parser, a money/security path) leaves ONE runnable check behind, the
 smallest thing that fails if the logic breaks: an `assert`-based
