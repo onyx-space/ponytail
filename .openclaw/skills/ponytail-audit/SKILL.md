@@ -26,7 +26,12 @@ thing, dead flags and config, hand-rolled stdlib.
 
 ## Output
 
-One line per finding, ranked: `<tag> <what to cut>. <replacement>. [path]`.
+One line per finding, ranked: `<tag> <what to cut>. <replacement>. path:L<line>.`
+Locate each finding like ponytail-review does: `path:L12` for a single line,
+`path:L12-38` for a range, `path/sub/file.py:L88` when the path alone is not
+enough to find it. No line numbers means the agent greps for the file, then
+the symbol, then still guesses — a ranked list is only actionable when each
+row points at the exact spot.
 End with `net: -<N> lines, -<M> deps possible.` Nothing to cut: `Lean already. Ship.`
 
 ## Boundaries
